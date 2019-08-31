@@ -1,0 +1,88 @@
+---
+title: "Grp Asn E3"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+```{r}
+Auto = read.table("H:/Move to new laptop 20190605/Personal/PMBA/Fall 2019/Predictive Analysis/Grp 1/Auto.data",header = T, na.strings = "?")
+Auto = na.omit(Auto)
+fix(Auto)
+summary(Auto)
+
+#Question a
+# Quanitative Predictors - "mpg","cylinders","displacement", "horsepower", "weight", "acceleration", "year"
+# Qualitative Predictors - "origin", "name" 
+
+#Question b
+sapply(Auto[,-c(8,9)], range)
+
+#Question c
+sapply(Auto[,-c(8,9)], mean)
+sapply(Auto[,-c(8,9)], sd)
+
+#Question d
+Autonew = Auto[-c(10:85), ]
+sapply(Autonew[,-c(8,9)], range)
+sapply(Autonew[,-c(8,9)], mean)
+sapply(Autonew[,-c(8,9)], sd)
+
+#Question e
+attach(Auto)
+plot(Auto)
+plot(origin,year) 
+  # We see no relation with country of origin to year of manufacturing.
+hist(origin) 
+  # Here we see about 250 data points belong to America as country of origin. However only 60 and 70 belong to Europe and Japan, respectively.
+plot(mpg,year) 
+  # We see some correlation in MPG and year of manufacturing. There is gradual improvement in the MPG over the 12 years starting in 70's.
+plot(mpg,acceleration) 
+  # We do not see direct correlation in MPG and acceleration.
+plot(mpg,displacement) 
+  # We see some correlation in MPG and displacement. Cars with high displacement have low MPG.
+
+#Question f
+plot(mpg,cylinders) 
+  # We see direct correlation in MPG and number of cylinders. As the number of cylinders increase the MPG goes down.
+boxplot(mpg~origin) 
+  # We see direct correlation in MPG and the country of origin. Cars with country of origin as Japan (3) have a higer MPG range. 
+plot(mpg,weight) 
+  # We see direct correlation in MPG and weight. As the weight increase the MPG goes down.
+plot(mpg,horsepower) 
+  # We see direct correlation in MPG and horsepower As the horsepower increase the MPG goes down. 
+plot(mpg,year) 
+  # We see some correlation in MPG and year of manufacturing. There is gradual improvement in the MPG over the 12 years starting in 70's.
+  # Predictors for MPG are 
+  #   1) Cylinders
+  #   2) origin
+  #   3) weight
+  #   4) horsepower
+  #   5) year
+
+```
+[1] "mpg"          "cylinders"    "displacement" "horsepower"  
+[5] "weight"       "acceleration" "year"         "origin"      
+[9] "name"  
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
